@@ -1,0 +1,12 @@
+{
+  "task": "Demo login on the-internet.herokuapp.com",
+  "steps": [
+    { "kind": "navigate", "url": "https://the-internet.herokuapp.com/login", "description": "Open the login page" },
+    { "kind": "fill", "field": "username", "value": "{{ENV:DEMO_USERNAME}}" },
+    { "kind": "fill", "field": "password", "value": "{{ENV:DEMO_PASSWORD}}" },
+    { "kind": "click", "field": "submit", "description": "Submit the login form" },
+    { "kind": "wait", "selector": "#flash.success", "description": "Wait for the success message" },
+    { "kind": "screenshot", "path": "demo-login.png", "description": "Capture the logged-in page" },
+    { "kind": "read", "selector": "#flash", "description": "Read the result message" }
+  ]
+}

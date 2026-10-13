@@ -1,0 +1,14 @@
+{
+  "task": "View booking {{BOOKING_ID}}",
+  "steps": [
+    { "kind": "navigate", "url": "https://sandbox.tripgic.com/login", "description": "Open the login page" },
+    { "kind": "fill", "field": "username", "value": "{{ENV:TRIPGIC_USERNAME}}" },
+    { "kind": "fill", "field": "password", "value": "{{ENV:TRIPGIC_PASSWORD}}" },
+    { "kind": "click", "field": "submit", "description": "Submit the login form" },
+    { "kind": "wait", "selector": "text=My account", "description": "Wait until logged in" },
+    { "kind": "navigate", "url": "https://sandbox.tripgic.com/booking-details/flight?tracking_id={{BOOKING_ID}}", "description": "Open the booking details page" },
+    { "kind": "wait", "duration_ms": 4000, "description": "Let the booking load" },
+    { "kind": "screenshot", "path": "booking-{{BOOKING_ID}}.png", "description": "Capture the booking page" },
+    { "kind": "read", "selector": "body", "description": "Read the booking details" }
+  ]
+}

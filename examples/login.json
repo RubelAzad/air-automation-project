@@ -1,0 +1,31 @@
+{
+  "task": "Sign in to the authorized site",
+  "steps": [
+    {
+      "kind": "navigate",
+      "url": "{{ENV:SITE_URL}}",
+      "description": "Open the login page"
+    },
+    {
+      "kind": "fill",
+      "selector": "input[name='username']",
+      "value": "{{ENV:SITE_USERNAME}}"
+    },
+    {
+      "kind": "fill",
+      "selector": "input[name='password']",
+      "value": "{{ENV:SITE_PASSWORD}}"
+    },
+    {
+      "kind": "click",
+      "selector": "button[type='submit']",
+      "consequential": true,
+      "description": "Submit the login form"
+    },
+    {
+      "kind": "read",
+      "selector": "body",
+      "description": "Read the resulting page text"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "task": "Reissue quote for PNR {{BOOKING_ID}}: first price one week from today",
+  "steps": [
+    { "kind": "navigate", "url": "https://fo-asia.ttinteractive.com/Zenith/FrontOffice/USBangla/TravelAgency/Login", "description": "Open the login page" },
+    { "kind": "fill", "field": "username", "value": "{{ENV:BS_USERNAME}}" },
+    { "kind": "fill", "field": "password", "value": "{{ENV:BS_PASSWORD}}" },
+    { "kind": "wait", "duration_ms": 2000, "description": "Let the login page scripts finish loading" },
+    { "kind": "press", "selector": "#LoginPwd", "key": "Enter", "description": "Submit the login form" },
+    { "kind": "wait", "selector": "input[placeholder='Code']", "description": "Wait for the OTP screen" },
+    { "kind": "fill", "selector": "input[placeholder='Code']", "value": "{{EMAIL_OTP}}", "description": "Enter the OTP from email" },
+    { "kind": "press", "selector": "input[placeholder='Code']", "key": "Enter", "description": "Verify the OTP" },
+    { "kind": "wait", "selector": "#Search", "description": "Wait for the dashboard" },
+    { "kind": "fill", "selector": "#Search", "value": "{{BOOKING_ID}}", "description": "Type the PNR into quick search" },
+    { "kind": "press", "selector": "#Search", "key": "Enter", "description": "Open the PNR" },
+    { "kind": "wait", "frame": "iframe[name=mainFrame]", "selector": "input[id$='btModifierBillet']:visible >> nth=0", "description": "Wait for the PNR page" },
+    { "kind": "wait", "duration_ms": 2000, "description": "Let the PNR page finish loading" },
+    { "kind": "click", "frame": "iframe[name=mainFrame]", "selector": "input[id$='btModifierBillet']:visible >> nth=0", "description": "Modify the first flight" },
+    { "kind": "wait", "frame": "iframe[name=mainFrame]", "selector": "#CalendarID0", "description": "Wait for the exchange search form" },
+    { "kind": "fill", "frame": "iframe[name=mainFrame]", "selector": "#CalendarID0", "value": "{{TODAY+7}}", "description": "New departure date: one week from today" },
+    { "kind": "press", "frame": "iframe[name=mainFrame]", "selector": "#CalendarID0", "key": "Tab", "description": "Close the date picker" },
+    { "kind": "click", "frame": "iframe[name=mainFrame]", "selector": "button:has-text('Search flights')", "description": "Search flights for the new date" },
+    { "kind": "wait", "frame": "iframe[name=mainFrame]", "selector": "span.label-info:has-text('Total price'):visible >> nth=0", "description": "Wait for search results" },
+    { "kind": "read", "frame": "iframe[name=mainFrame]", "selector": "span.label-info:has-text('Total price'):visible >> nth=0", "description": "First price" },
+    { "kind": "screenshot", "path": "reissue-{{BOOKING_ID}}.png", "description": "Capture the search results" }
+  ]
+}

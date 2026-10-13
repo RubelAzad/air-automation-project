@@ -1,0 +1,7 @@
+.env
+audit.log
+sites.yaml
+.browser-profile/
+*.screenshots/
+*.png
+browser-agent

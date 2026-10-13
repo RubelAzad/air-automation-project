@@ -1,0 +1,15 @@
+{
+  "task": "Log in to BS (US-Bangla travel agency portal)",
+  "steps": [
+    { "kind": "navigate", "url": "https://fo-asia.ttinteractive.com/Zenith/FrontOffice/USBangla/TravelAgency/Login", "description": "Open the login page" },
+    { "kind": "fill", "field": "username", "value": "{{ENV:BS_USERNAME}}" },
+    { "kind": "fill", "field": "password", "value": "{{ENV:BS_PASSWORD}}" },
+    { "kind": "wait", "duration_ms": 2000, "description": "Let the login page scripts finish loading" },
+    { "kind": "press", "selector": "#LoginPwd", "key": "Enter", "description": "Submit the login form" },
+    { "kind": "wait", "selector": "input[placeholder='Code']", "description": "Wait for the OTP screen" },
+    { "kind": "fill", "selector": "input[placeholder='Code']", "value": "{{EMAIL_OTP}}", "description": "Enter the OTP from email" },
+    { "kind": "press", "selector": "input[placeholder='Code']", "key": "Enter", "description": "Verify the OTP" },
+    { "kind": "wait", "duration_ms": 8000, "description": "Let the dashboard load" },
+    { "kind": "screenshot", "path": "bs-logged-in.png", "description": "Capture the page after login" }
+  ]
+}

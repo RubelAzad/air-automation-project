@@ -1,0 +1,40 @@
+{
+  "task": "Sign in and open billing",
+  "steps": [
+    {
+      "kind": "navigate",
+      "url": "{{ENV:SITE_URL}}",
+      "description": "Open the login page"
+    },
+    {
+      "kind": "fill",
+      "field": "username",
+      "value": "{{ENV:SITE_USERNAME}}"
+    },
+    {
+      "kind": "fill",
+      "field": "password",
+      "value": "{{ENV:SITE_PASSWORD}}"
+    },
+    {
+      "kind": "click",
+      "field": "submit",
+      "consequential": true,
+      "description": "Submit the login form"
+    },
+    {
+      "kind": "await_user",
+      "prompt": "Complete any 2FA or CAPTCHA in the browser, then press Enter."
+    },
+    {
+      "kind": "click",
+      "menu": "billing",
+      "description": "Open the billing menu"
+    },
+    {
+      "kind": "read",
+      "selector": "body",
+      "description": "Read the resulting page text"
+    }
+  ]
+}

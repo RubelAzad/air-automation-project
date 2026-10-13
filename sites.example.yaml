@@ -1,0 +1,32 @@
+sites:
+  acme:
+    domains:
+      - acme.example.com
+    login_url: https://acme.example.com/login
+    selectors:
+      username: "input[name='username']"
+      password: "input[name='password']"
+      submit: "button[type='submit']"
+    menus:
+      dashboard: "nav a[href='/dashboard']"
+      billing: "nav a[href='/billing']"
+      settings: "nav a[href='/settings']"
+    mfa:
+      prompt: "Enter the 2FA code from your authenticator app in the browser, then press Enter."
+      detect: "input[name='otp'], input[autocomplete='one-time-code']"
+
+  globex:
+    domains:
+      - globex.example.com
+      - api.globex.example.com
+    login_url: https://globex.example.com/signin
+    selectors:
+      username: "#email"
+      password: "#pass"
+      submit: "#login-button"
+    menus:
+      orders: "a[data-testid='orders-link']"
+      invoices: "a[data-testid='invoices-link']"
+    captcha:
+      prompt: "Solve the CAPTCHA in the browser, then press Enter."
+      detect: "iframe[src*='recaptcha'], iframe[title*='captcha']"

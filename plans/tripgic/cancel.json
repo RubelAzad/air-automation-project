@@ -1,0 +1,16 @@
+{
+  "task": "Cancel booking {{BOOKING_ID}}",
+  "steps": [
+    { "kind": "navigate", "url": "https://sandbox.tripgic.com/login", "description": "Open the login page" },
+    { "kind": "fill", "field": "username", "value": "{{ENV:TRIPGIC_USERNAME}}" },
+    { "kind": "fill", "field": "password", "value": "{{ENV:TRIPGIC_PASSWORD}}" },
+    { "kind": "click", "field": "submit", "description": "Submit the login form" },
+    { "kind": "wait", "selector": "text=My account", "description": "Wait until logged in" },
+    { "kind": "navigate", "url": "https://sandbox.tripgic.com/booking-details/flight?tracking_id={{BOOKING_ID}}", "description": "Open the booking details page" },
+    { "kind": "click", "selector": "button:has-text('Cancel Booking')", "description": "Open the cancel dialog" },
+    { "kind": "fill", "selector": "textarea[placeholder='Note']", "value": "Cancelled by browser agent" },
+    { "kind": "click", "selector": "button:has-text('Submit')", "consequential": true, "description": "Confirm the booking cancellation" },
+    { "kind": "wait", "duration_ms": 5000, "description": "Let the cancellation finish" },
+    { "kind": "screenshot", "path": "cancelled-{{BOOKING_ID}}.png", "description": "Capture the result" }
+  ]
+}
